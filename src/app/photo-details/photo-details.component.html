@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header text-center">
+        <button class="btn btn-outline-secondary float-left"
+            style="width: auto;"
+            (click)='onBack()'>
+            <i class="fa fa-chevron-left"></i> Back
+        </button>
+        <div class="navbar-brand">{{pageTitle}}</div>
+    </div>
+    <div class='card-body'>
+        <div class='row justify-content-center'>
+          <div class='col-md-5'>
+            <div class='row'>
+              <div class='col-md-8'><b>Album Id:</b> {{photo?.albumId}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-8'><b>Id:</b> {{photo.id}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-8'><b>Title:</b> {{photo.title}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-8'><b>Url:</b> {{photo.url}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-8'><b>Thumbnail Url:</b> {{photo.thumbnailUrl}}</div>
+            </div>
+          </div>
+    
+          <div class='col-md-5'>
+            <img class='center-block img-fluid'
+                 [src]='photo.url'
+                 [title]='photo.title'>
+          </div>
+        </div>
+      </div>
+
+    <div class="card-footer text-center">
+        <button class="btn btn-outline-danger"
+                style="width: auto;"
+                (click)='delete()'>
+            <i class="fa fa-trash"></i> Delete
+        </button>
+        <button class="btn btn-outline-success"
+                style="width: auto; margin-left: 10px;"
+                (click)='edit()'>
+            <i class="fa fa-trash"></i> Edit
+        </button>
+    </div>
+</div>
+

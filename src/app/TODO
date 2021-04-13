@@ -1,0 +1,14 @@
+Component for viewing full picture and its Details (Details Mode)
+Route from list of images to picture Component
+Fetch Images from DB -- Photo service
+
+Editing Mode Component
+Delete service so confirm dialog
+
+Upload service
+
+
+
+(Optional should work on mobile and web)
+(Optional should work on chrome, firefox, edge ii IE11!!)
+

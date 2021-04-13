@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand navbar-light bg-light justify-content-center">
+    <a class="navbar-brand">{{title}}</a>
+    <button (click)='getPhotos()'></button>
+</nav>
+<div
+
+    infinite-scroll
+    [infiniteScrollDistance]="distance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScroll()"
+>
+
+<div class="row justify-content-center"
+        *ngFor='let photo of photos'>
+        <div class="card col-lg-6 center-content">
+            <div class="card-header w-100"><b>Title: </b><a [routerLink]="['/photos', photo.id]" title="Photo details: {{photo.title}}">{{photo.title}}</a></div>
+            <img class="card-img-top" src="{{photo.thumbnailUrl}}" style="width: 150px;"  [routerLink]="['/photos', photo.id]" title="{{photo.title}}">
+        </div>
+    </div>
+
+
+
+
+</div>

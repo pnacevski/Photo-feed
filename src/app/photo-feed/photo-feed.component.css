@@ -1,0 +1,51 @@
+.card{
+    padding: 0;
+    border-top: 2px solid gray;
+    background-color: white;
+}
+*{
+    background-color: rgba(240, 235, 235, 0.212);
+}
+.card-header{
+    background-color: white;
+    border-bottom: 1px solid gray;
+}
+.card-header b, .card-header a{
+    background-color: white;
+}
+/*
+.card-header a{
+    color: black;
+}
+*/
+.card-footer{
+    background-color: white;
+    border-top: 1px solid gray;
+    cursor: pointer;
+}
+.card-footer:hover{
+    color: rgba(20, 20, 20, 0.788);
+}
+.card-text, .card-body{
+    background-color: white !important;
+}
+.card-img-top{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+@media (min-width:992px){
+    .card{
+        padding: 0;
+        border: 2px solid gray;
+        background-color: white;
+        margin-top: 5px;
+    }
+}
+
+
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
