@@ -1,24 +1,56 @@
+
 <nav class="navbar navbar-expand navbar-light bg-light justify-content-center">
     <a class="navbar-brand">{{title}}</a>
-    <button (click)='getPhotos()'></button>
 </nav>
-<div
 
-    infinite-scroll
-    [infiniteScrollDistance]="distance"
-    [infiniteScrollThrottle]="throttle"
-    (scrolled)="onScroll()"
->
 
-<div class="row justify-content-center"
-        *ngFor='let photo of photos'>
-        <div class="card col-lg-6 center-content">
-            <div class="card-header w-100"><b>Title: </b><a [routerLink]="['/photos', photo.id]" title="Photo details: {{photo.title}}">{{photo.title}}</a></div>
-            <img class="card-img-top" src="{{photo.thumbnailUrl}}" style="width: 150px;"  [routerLink]="['/photos', photo.id]" title="{{photo.title}}">
+<div class="container-fluid py-5 w-100">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 text-center card border-success">
+            <div class="card-header container-card"><b class="text-success">Add a new Photo </b><br>Click button to add a new photo</div>
+            <div class="card-body text-center" (click)='addPhoto()' title="Add a new photo"><button class="btn btn-outline-success">Click here to add Photo!</button></div>
+        </div>
+  
+        <div class="col-sm-4 text-center card border-warning">
+            <div class="card-header container-card"><b class="text-warning"> Load all Photos</b><br>Will cause lag while loading!!!</div>
+            <div class="card-body text-center" (click)='loadAll()' title="Load all photos, will cause lag"><button class="btn btn-outline-warning">Load all!</button></div>
         </div>
     </div>
+    <div class="row justify-content-center" *ngIf='addNewPhoto'>
+        
+            
+            <div class="col-sm-8 text-center card border-primary card-padding">
+                <form #photoForm="ngForm" (ngSubmit)=onSubmit(photoForm.value)>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="It can be anything" name="title" ngModel>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="url">Link to picture</label>
+                          <input type="text" class="form-control" id="url" placeholder="https://via.placeholder.com/600" name="url" ngModel>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="thumbnailUrl">Thumbnail link</label>
+                          <input type="text" class="form-control" id="thumbnailUrl" placeholder="Example: https://via.placeholder.com/150 (You can use the full size photo)" name="thumbnailUrl" ngModel>
+                        </div>
+                    </div>
+                      <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </form>
+          </div>
+        
+    </div>
+</div>
 
-
-
-
+<div infinite-scroll
+     [infiniteScrollDistance]="distance"
+     [infiniteScrollThrottle]="throttle"
+     (scrolled)="onScroll()">
+    <div class="row justify-content-center"
+        *ngFor='let photo of photos'>
+        <div class="card col-sm-6 center-content col-">
+            <div class="card-header w-100"><b>Title: </b><a [routerLink]="['/photos', photo.id]" title="Photo details: {{photo.title}}">{{photo.title}}</a></div>
+            <img class="card-img-top" src="{{photo.thumbnailUrl}}" style="width: 150px;height: 150px;"  [routerLink]="['/photos', photo.id]" title="{{photo.title}}">
+        </div>
+    </div>
 </div>

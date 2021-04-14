@@ -41,15 +41,9 @@ export class PhotoDetailsComponent implements OnInit {
     this.router.navigate(['/photos',Number(this.photo.id)+1]);
   }
   delete(): void{
-    //this.photoFeedComp.delete(Number(this.photo.id)); /// DATABINDING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if(confirm("Are you sure?")){
+    if(confirm("Are you sure you want to delete this photo")){
       var returnVal = this.photoService.deletePhoto(Number(this.photo.id));
-    }
-    if(returnVal){
-
-    this.router.navigate(['/photos']);
-    }
-    
+    }    
   }
   edit(): void{
 

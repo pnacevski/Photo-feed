@@ -1,7 +1,5 @@
-import { ResourceLoader } from '@angular/compiler';
-import { Component, DoCheck, IterableDiffers, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, IterableDiffers, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { IPhoto } from '../models/photo';
 import { PhotoService } from '../Services/photo.service';
 
@@ -19,7 +17,7 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
   throttle = 0;
   distance = 2;
   page: number = 1;
-  
+  addNewPhoto: boolean = false;
 
   constructor(private photoService: PhotoService, differs: IterableDiffers) { }
   ngDoCheck(): void {
@@ -32,16 +30,40 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
     this.photoService.getPhotosStart().subscribe((photos:IPhoto[]) =>{
       this.allPhotos = photos;
       this.photos = this.allPhotos.slice(0,10);
-    })
-    console.log("in get photos");
-    console.log(this.allPhotos);
-    console.log(this.photos);
+      console.log("in getPhotos photofeed allphotos: ");
+      console.log(this.allPhotos);
+      console.log("in getPhotos photofeed photos: ");
+      console.log(this.photos);
+    });
   }
   onScroll():void{
-    if(this.page == 500){
+    if(this.page > this.allPhotos.length/10){
       return;
     }else{
       this.photos.push(...this.allPhotos.slice(this.photos.length,++this.page*10));
+      console.log(this.photos);
+    }
+  }
+  loadAll():void{
+    this.photos.push(...this.allPhotos.slice(this.photos.length,this.allPhotos.length));
+  }
+  addPhoto(){
+    this.addNewPhoto = !this.addNewPhoto;
+  }
+  onSubmit(data){
+    console.log("NewFOTO: "+data.title+" "+data.url+" "+data.thumbnailUrl);
+    var newPhotoId:number = Number(this.allPhotos[this.allPhotos.length-1].id) + 1;
+    console.log(newPhotoId);
+    if(data.title != "" || data.url != "" || data.thumbnailUrl != ""){
+      var tmp: IPhoto = {
+        albumId: 1,
+        id: newPhotoId,
+        title: data.title,
+        url: data.url,
+        thumbnailUrl: data.thumbnailUrl
+      }
+      this.photoService.addPhoto(tmp);
+      console.log(tmp);
     }
   }
 }
