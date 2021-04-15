@@ -9,7 +9,7 @@ import { PhotoService } from '../Services/photo.service';
   templateUrl: './photo-feed.component.html',
   styleUrls: ['./photo-feed.component.css']
 })
-export class PhotoFeedComponent implements OnInit, DoCheck{
+export class PhotoFeedComponent implements OnInit{
   title: string = 'Photo List';
   sub! : Subscription;
   errorMessage: string = '';
@@ -21,9 +21,6 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
   addNewPhoto: boolean = false;
 
   constructor(private photoService: PhotoService, private modalService: NgbModal) { }
-  ngDoCheck(): void {
-    const change = this.allPhotos
-  }
   ngOnInit(): void {
       this.getPhotos();
   }
