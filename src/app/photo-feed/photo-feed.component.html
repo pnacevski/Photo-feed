@@ -8,12 +8,12 @@
     <div class="row justify-content-center">
         <div class="col-sm-4 text-center card border-success">
             <div class="card-header container-card text-muted"><b class="text-success">Add a new Photo </b><br>Click button to add a new photo</div>
-            <div class="card-body text-center" (click)='addPhoto()' title="Add a new photo"><button class="btn btn-outline-success">Click here to add Photo!</button></div>
+            <div class="card-body text-center"><button class="btn btn-outline-success" (click)='addPhoto()' title="Add a new photo"><i class="fa fa-plus"></i> Click here to add Photo!</button></div>
         </div>
   
         <div class="col-sm-4 text-center card border-warning">
             <div class="card-header container-card text-muted"><b class="text-warning"> Load all Photos</b><br>Will cause lag while loading!!!</div>
-            <div class="card-body text-center" (click)='loadAll()' title="Load all photos, will cause lag"><button class="btn btn-outline-warning">Load all!</button></div>
+            <div class="card-body text-center"><button class="btn btn-outline-warning" (click)='loadAll()' title="Load all photos, will cause lag"><i class="fa fa-spinner"></i> Load all!</button></div>
         </div>
     </div>
     <div class="row justify-content-center" *ngIf='addNewPhoto'>
@@ -35,7 +35,7 @@
                           <input type="text" class="form-control" id="thumbnailUrl" placeholder="Example: https://via.placeholder.com/150 (You can use the full size photo)" name="thumbnailUrl" ngModel>
                         </div>
                     </div>
-                      <button type="submit" class="btn btn-outline-primary">Submit</button>
+                      <button type="submit" class="btn btn-outline-primary"><i class="fa fas fa-upload"></i> Submit</button>
                 </form>
           </div>
         

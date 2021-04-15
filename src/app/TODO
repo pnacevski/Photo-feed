@@ -2,7 +2,7 @@ Component for viewing full picture and its Details (Details Mode) ==============
 Route from list of images to picture Component ==================================== DONE
 Fetch Images from DB -- Photo service ============================================= DONE
 
-Editing Mode Component ============================================================ TBD
+Editing Mode Component ============================================================ DONE
 Delete service so confirm dialog ================================================== DONE ? mby change confirmDialog 
 
 Upload service ==================================================================== DONE

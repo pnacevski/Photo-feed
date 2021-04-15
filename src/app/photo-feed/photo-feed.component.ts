@@ -54,7 +54,7 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
     console.log("NewFOTO: "+data.title+" "+data.url+" "+data.thumbnailUrl);
     var newPhotoId:number = Number(this.allPhotos[this.allPhotos.length-1].id) + 1;
     console.log(newPhotoId);
-    if(data.title != "" || data.url != "" || data.thumbnailUrl != ""){
+    if(data.title !== "" && data.url !== "" && data.thumbnailUrl !== ""){
       var tmp: IPhoto = {
         albumId: 1,
         id: newPhotoId,
@@ -64,6 +64,12 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
       }
       this.photoService.addPhoto(tmp);
       console.log(tmp);
+      data.title = "";
+      data.url = "";
+      data.thumbnailUrl = "";
+    }else{
+      alert("You need to fill out all fields");
     }
+    
   }
 }

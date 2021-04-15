@@ -43,9 +43,29 @@
         </button>
         <button class="btn btn-outline-success"
                 style="width: auto; margin-left: 10px;"
-                (click)='edit()'>
-            <i class="fa fa-trash"></i> Edit
+                (click)='showEdit()'>
+            <i class="fa fa-edit"></i> Edit
         </button>
+    </div>
+
+    <div class='card-body text-center' *ngIf='toEdit'>
+      <form #photoForm="ngForm" (ngSubmit)=edit(photoForm.value)>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="It can be anything" name="title" ngModel>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="url">Link to picture</label>
+              <input type="text" class="form-control" id="url" placeholder="https://via.placeholder.com/600" name="url" ngModel>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="thumbnailUrl">Thumbnail link</label>
+              <input type="text" class="form-control" id="thumbnailUrl" placeholder="Example: https://via.placeholder.com/150 (You can use the full size photo)" name="thumbnailUrl" ngModel>
+            </div>
+        </div>
+          <button type="submit" class="btn btn-outline-primary"><i class="fa fas fa-upload"></i> Submit</button>
+    </form>
     </div>
 </div>
 

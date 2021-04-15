@@ -45,5 +45,11 @@ export class PhotoService {
       this.router.navigate(['photos',Number(photo.id)]);
     });
   }
+
+  editPhoto(photo: IPhoto):void{
+      this.http.put<IPhoto>(`https://jsonplaceholder.typicode.com/photos/${photo.id}`,photo).subscribe(ph => {
+        this.photosObservable = this.photosObservable.pipe(map((photos:IPhoto[]) => photos.map((phot:IPhoto) => phot.id === ph.id ? phot = ph : phot = phot)))
+      });
+  }
 }
 

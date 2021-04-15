@@ -11,6 +11,7 @@ import { PhotoService } from '../Services/photo.service';
 export class PhotoDetailsComponent implements OnInit {
   pageTitle: string = 'Photo Details';
   photo: IPhoto | undefined;
+  toEdit: boolean = false;
   constructor(private route: ActivatedRoute, 
       private router: Router,
       private photoService: PhotoService) { }
@@ -45,8 +46,29 @@ export class PhotoDetailsComponent implements OnInit {
       var returnVal = this.photoService.deletePhoto(Number(this.photo.id));
     }    
   }
-  edit(): void{
+  showEdit():void{
+    this.toEdit = !this.toEdit;
+  }
+  edit(data): void{
+    if((data.title === "" || data.title === this.photo.title) && 
+        (data.url === "" || data.url === this.photo.url) &&
+        (data.thumbnailUrl === "" || data.thumbnailUrl === this.photo.thumbnailUrl)){
+      alert("Nothing to change");
+      return;
+    }
+    if(data.title !== "")
+      this.photo.title = data.title;
+    if(data.url !== "")
+      this.photo.url = data.url;
+    if(data.thumbnailUrl !== "")
+      this.photo.thumbnailUrl = data.thumbnailUrl;
+    this.photoService.editPhoto(this.photo);
 
+    this.toEdit = false;
+    
+    data.title = "";
+    data.url = "";
+    data.thumbnailUrl = "";
   }
   hasPrevious(): boolean{
     if(this.photo.id === 1){
