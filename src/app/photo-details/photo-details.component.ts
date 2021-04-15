@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPhoto } from '../models/photo';
 import { PhotoService } from '../Services/photo.service';
 
@@ -14,7 +15,8 @@ export class PhotoDetailsComponent implements OnInit {
   toEdit: boolean = false;
   constructor(private route: ActivatedRoute, 
       private router: Router,
-      private photoService: PhotoService) { }
+      private photoService: PhotoService,
+      private modalService: NgbModal) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -22,6 +24,12 @@ export class PhotoDetailsComponent implements OnInit {
       const param = +id;
       this.getPhoto(param);
     }
+  }
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      //console.log(result);
+      if(result === "yes") this.delete();
+    });
   }
 
   getPhoto(id: number): void{
@@ -42,9 +50,7 @@ export class PhotoDetailsComponent implements OnInit {
     this.router.navigate(['/photos',Number(this.photo.id)+1]);
   }
   delete(): void{
-    if(confirm("Are you sure you want to delete this photo")){
-      var returnVal = this.photoService.deletePhoto(Number(this.photo.id));
-    }    
+    var returnVal = this.photoService.deletePhoto(Number(this.photo.id)); 
   }
   showEdit():void{
     this.toEdit = !this.toEdit;
