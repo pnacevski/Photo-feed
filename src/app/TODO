@@ -1,14 +1,14 @@
-Component for viewing full picture and its Details (Details Mode)
-Route from list of images to picture Component
-Fetch Images from DB -- Photo service
+Component for viewing full picture and its Details (Details Mode) ================= DONE
+Route from list of images to picture Component ==================================== DONE
+Fetch Images from DB -- Photo service ============================================= DONE
 
-Editing Mode Component
-Delete service so confirm dialog
+Editing Mode Component ============================================================ TBD
+Delete service so confirm dialog ================================================== DONE ? mby change confirmDialog 
 
-Upload service
+Upload service ==================================================================== DONE
 
 
 
-(Optional should work on mobile and web)
-(Optional should work on chrome, firefox, edge ii IE11!!)
+(Optional should work on mobile and web) ========================================== DONE
+(Optional should work on chrome, firefox, edge ii IE11!!) ========================= DONE
 
