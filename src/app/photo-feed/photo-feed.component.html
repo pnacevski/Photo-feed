@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand navbar-light bg-light justify-content-center">
-    <a class="navbar-brand">{{title}}</a>
+    <p class="navbar-brand text-primary">{{title}}</p>
 </nav>
 
 
@@ -8,12 +8,13 @@
     <div class="row justify-content-center">
         <div class="col-sm-4 text-center card border-success">
             <div class="card-header container-card text-muted"><b class="text-success">Add a new Photo </b><br>Click button to add a new photo</div>
-            <div class="card-body text-center"><button class="btn btn-outline-success" (click)='addPhoto()' title="Add a new photo"><i class="fa fa-plus"></i> Click here to add Photo!</button></div>
+            <div class="card-body text-center" *ngIf='!addNewPhoto'><button class="btn btn-outline-success" (click)='addPhoto()' title="Add a new photo" ><i class="fa fa-plus"></i> Click here to add Photo!</button></div>
+            <div class="card-body text-center" *ngIf='addNewPhoto'><button class="btn btn-dark" (click)='addPhoto()' title="Cancel adding new photo" ><i class="fa fa-times-circle"></i> Cancel new photo</button></div>
         </div>
   
         <div class="col-sm-4 text-center card border-warning">
-            <div class="card-header container-card text-muted"><b class="text-warning"> Load all Photos</b><br>Will cause lag while loading!!!</div>
-            <div class="card-body text-center"><button class="btn btn-outline-warning" (click)='loadAll()' title="Load all photos, will cause lag"><i class="fa fa-spinner"></i> Load all!</button></div>
+            <div class="card-header container-card text-muted"><b class="text-warning"> Load all Photos</b><br>Click button to load all photos immediately,<strong> may cause lag!</strong></div>
+            <div class="card-body text-center"><button class="btn btn-outline-warning" (click)='open(content)' title="Load all photos immediately, will cause lag"><i class="fa fa-spinner"></i> Load all!</button></div>
         </div>
     </div>
     <div class="row justify-content-center" *ngIf='addNewPhoto'>
@@ -54,3 +55,25 @@
         </div>
     </div>
 </div>
+
+<!-- confirmation modal -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-warning-title">Image deletion</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <p><strong>Are you sure you want to load all images</strong></p>
+          <p><span class="text-danger">May cause lag or even crash browser</span></p>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('yes')">Yes</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cancel')">No</button>
+    </div>
+  </ng-template>

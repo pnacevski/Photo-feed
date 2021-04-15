@@ -27,7 +27,6 @@ export class PhotoDetailsComponent implements OnInit {
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      //console.log(result);
       if(result === "yes") this.delete();
     });
   }
@@ -41,16 +40,8 @@ export class PhotoDetailsComponent implements OnInit {
   onBack(): void{
     this.router.navigate(['/photos']);
   }
-  previous(): void{
-    var id = Number(this.photo.id)-1;
-    
-    this.router.navigate(['/photos/2']);
-  }
-  next(): void{
-    this.router.navigate(['/photos',Number(this.photo.id)+1]);
-  }
   delete(): void{
-    var returnVal = this.photoService.deletePhoto(Number(this.photo.id)); 
+    this.photoService.deletePhoto(Number(this.photo.id)); 
   }
   showEdit():void{
     this.toEdit = !this.toEdit;

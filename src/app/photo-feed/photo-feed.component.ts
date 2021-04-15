@@ -1,4 +1,5 @@
 import { Component, DoCheck, IterableDiffers, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { IPhoto } from '../models/photo';
 import { PhotoService } from '../Services/photo.service';
@@ -19,7 +20,7 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
   page: number = 1;
   addNewPhoto: boolean = false;
 
-  constructor(private photoService: PhotoService, differs: IterableDiffers) { }
+  constructor(private photoService: PhotoService, private modalService: NgbModal) { }
   ngDoCheck(): void {
     const change = this.allPhotos
   }
@@ -30,10 +31,6 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
     this.photoService.getPhotosStart().subscribe((photos:IPhoto[]) =>{
       this.allPhotos = photos;
       this.photos = this.allPhotos.slice(0,10);
-      console.log("in getPhotos photofeed allphotos: ");
-      console.log(this.allPhotos);
-      console.log("in getPhotos photofeed photos: ");
-      console.log(this.photos);
     });
   }
   onScroll():void{
@@ -41,7 +38,6 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
       return;
     }else{
       this.photos.push(...this.allPhotos.slice(this.photos.length,++this.page*10));
-      console.log(this.photos);
     }
   }
   loadAll():void{
@@ -51,9 +47,7 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
     this.addNewPhoto = !this.addNewPhoto;
   }
   onSubmit(data){
-    console.log("NewFOTO: "+data.title+" "+data.url+" "+data.thumbnailUrl);
     var newPhotoId:number = Number(this.allPhotos[this.allPhotos.length-1].id) + 1;
-    console.log(newPhotoId);
     if(data.title !== "" && data.url !== "" && data.thumbnailUrl !== ""){
       var tmp: IPhoto = {
         albumId: 1,
@@ -63,13 +57,16 @@ export class PhotoFeedComponent implements OnInit, DoCheck{
         thumbnailUrl: data.thumbnailUrl
       }
       this.photoService.addPhoto(tmp);
-      console.log(tmp);
       data.title = "";
       data.url = "";
       data.thumbnailUrl = "";
     }else{
       alert("You need to fill out all fields");
-    }
-    
+    } 
+  }
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      if(result === "yes") this.loadAll();
+    });
   }
 }

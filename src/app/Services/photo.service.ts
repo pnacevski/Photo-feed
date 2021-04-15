@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { IPhoto } from '../models/photo';
-import { tap, catchError, map, delay } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -18,22 +18,19 @@ export class PhotoService {
   }
 
   getPhoto(id: number): Observable<IPhoto | undefined>{
-    console.log(this.photosObservable);
     return this.photosObservable
     .pipe(
         map((photos: IPhoto[]) => photos.find(p=>p.id === id))
       );
-  }//DOBAR
+  }
 
 
-  deletePhoto(id: Number): boolean{
+  deletePhoto(id: Number): void{
     this.http.delete<IPhoto[]>(`https://jsonplaceholder.typicode.com/photos/${id}`)
-      .subscribe((code) => {
+      .subscribe((ph) => {
         this.photosObservable = this.photosObservable.pipe(map((photos:IPhoto[]) => photos.filter((photo:IPhoto)=>photo.id != id)));
-        console.log(code);
-          this.router.navigate(['/photos']);
+        this.router.navigate(['/photos']);
       });
-      return false;
   }
 
   addPhoto(photo:IPhoto): void{
